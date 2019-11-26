@@ -1,0 +1,19 @@
+.register-type{
+    display: none;
+}
+.register-type+label{
+    display: inline-block;
+    width: 50%;
+    float: left;
+    background-color: #eeeeee;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    color: #aaaaaa;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.register-type:checked+label{
+    background-color: rgb(128, 179, 255);
+    color: #000000;
+}
