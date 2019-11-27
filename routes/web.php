@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\ThreadController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,3 +25,7 @@ Route::get('/test', function ()
 {
     return view('welcome');
 });
+
+Route::resource('threads', 'ThreadsController');
+Route::post('/threads/{thread}/replies', 'RepliesController@store');
+
