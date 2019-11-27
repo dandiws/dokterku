@@ -11,15 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/test', function ()
 {
     return view('welcome');
 });
+
+Route::get('doctors','HomeController@search')->name('doctor.search');
+
+Route::get('chat-users', 'ChatsController@users')->name('chat.users');
+Route::get('chats', 'ChatsController@index')->name('chat.index');
+Route::get('chats/{friend}', 'ChatsController@friend')->name('chat.friend');
+Route::get('messages/{friend}', 'ChatsController@fetchMessages')->name('messages.friend');
+Route::post('messages', 'ChatsController@sendMessage');
