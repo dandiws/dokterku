@@ -15,8 +15,8 @@
                         {{ $thread->title }}
                         </a> 
                       </h4>
-                    <div class="text-muted mb-3">{{ $thread->creator->name }} &bull; {{ $thread->created_at->diffForHumans() }}</div>
-                       <div class="body">{{ $thread->description }}</div>
+                    <div class="text-muted mb-3">{{ $thread->creator->name }} &bull; {{ $thread->created_at->diffForHumans() }} &bull; <a href="{{route("thread.channel",['channel'=>$thread->channel->slug])}}">{{$thread->channel->name}}</a></div>
+                      <div class="body">{{ $thread->description }}</div>
                     </article> 
 
                   <hr> 
