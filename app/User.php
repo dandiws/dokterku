@@ -38,6 +38,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function Threads()
+    {
+        return $this->hasMany('App\Thread');
+    }
+
+
+
     /**
      * A user can have many messages
      *
@@ -54,4 +62,5 @@ class User extends Authenticatable
             return DB::table('doctor_details')->where('user_id',$this->id)->join('specializations','doctor_details.specialization_id','=','specializations.id')->first();
         return null;
     }
+  
 }

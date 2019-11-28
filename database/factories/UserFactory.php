@@ -1,7 +1,11 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\Reply;
+use App\Thread;
 use App\User;
+use App\Channel;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +32,48 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+
+$factory->define(Thread::class, function (Faker $faker) {
+    return [
+        'user_id' => function(){
+            return factory('App\User')->create()->id; 
+        },
+        'channel_id' => function(){
+            return factory('App\Channel')->create()->id;
+        },
+        'title' => $faker->sentence,
+        'description' => $faker->paragraph
+    ];
+});
+
+$factory->define(Reply::class, function (Faker $faker) {
+    return [
+        'user_id' => function(){
+            return factory('App\User')->create()->id; 
+        },
+        'thread_id' => function(){
+            return factory('App\Thread')->create()->id; 
+        },
+        'description' => $faker->paragraph
+    ];
+});
+
+
+$factory->define(Channel::class, function (Faker $faker){
+    $name = $faker->word;
+    
+    return [
+        'user_id' => function(){
+            return factory('App\User')->create()->id; 
+        },
+        'channel_id' => function(){
+            return factory('App\Channel')->create()->id;
+        },
+        'name' => $name,
+        'slug' => $name
+    ];
+});
+
 $factory->afterCreating(App\User::class, function ($user, $faker) {
     if($user->type=='doctor'){
         DB::table('doctor_details')->insert([
@@ -37,3 +83,4 @@ $factory->afterCreating(App\User::class, function ($user, $faker) {
         ]);
     }
 });
+
