@@ -26,6 +26,15 @@ Route::get('/test', function ()
     return view('welcome');
 });
 
-Route::resource('threads', 'ThreadsController');
-Route::post('/threads/{thread}/replies', 'RepliesController@store');
+Route::get('threads', 'ThreadsController@index');
+Route::get('threads/create', 'ThreadsController@create');
+Route::get('threads/{channel}/{thread}', 'ThreadsController@show');
+Route::post('threads', 'ThreadsController@store');
+Route::get('threads/{channel}', 'ThreadsController@index');
+Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
+Route::get('channels', 'ChannelsController@index');
+Route::get('channels/create', 'ChannelsController@create');
+Route::post('channels', 'ChannelsController@store');
+
+
 
