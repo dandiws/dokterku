@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type'
     ];
 
     /**
@@ -37,10 +38,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function Threads()
     {
         return $this->hasMany('App\Thread');
     }
 
 
+
+    /**
+     * A user can have many messages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+    return $this->hasMany(Message::class);
+    }
+
+    public function doctorDetails()
+    {
+        if($this->type=='doctor') 
+            return DB::table('doctor_details')->where('user_id',$this->id)->join('specializations','doctor_details.specialization_id','=','specializations.id')->first();
+        return null;
+    }
+  
 }

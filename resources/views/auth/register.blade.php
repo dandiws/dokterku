@@ -4,12 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        <h3 class="text-center mb-3">{{ __('Register') }}</h3>
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
+                <div class="card-body p-0 pb-5">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+                        <div>
+                            <input type="radio" class="register-type" value="user" name="type" id="register-type-user"  {{request()->type!="doctor"?"checked":null}} /> <label for="register-type-user">User</label>
+                            <input type="radio" class="register-type" value="doctor" name="type" id="register-type-doctor" {{request()->type=="doctor"?"checked":null}} /> <label for="register-type-doctor">Doctor</label>
+                        </div>
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>

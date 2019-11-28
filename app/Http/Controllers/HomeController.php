@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $doctors = User::where('type','doctor')->get();
+        return view('home', ['doctors'=>$doctors]);
+    }
+
+    public function search(Request $req)
+    {
+        $name = $req->get('doctor_name')?$req->get('doctor_name'):'';
+        $doctors = User::where('type','doctor')->where('name', 'like', '%' . $name . '%')->get();
+        if($req->get('specialization_id')){
+            $doctors = $doctors->filter(function($val,$key) use($req){
+                if($val->doctorDetails()){
+                    return $val->doctorDetails()->specialization_id==$req->get('specialization_id');
+                }
+                return false;
+            });
+        }
+        
+
+        return view('home', ['doctors'=>$doctors]);
     }
 }

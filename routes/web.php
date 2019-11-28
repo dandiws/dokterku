@@ -11,21 +11,17 @@
 |
 */
 
-use App\Http\Controllers\ThreadController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/test', function ()
 {
     return view('welcome');
 });
 
+//kego
 Route::get('threads', 'ThreadsController@index');
 Route::get('threads/create', 'ThreadsController@create');
 Route::get('threads/{channel}/{thread}', 'ThreadsController@show');
@@ -37,4 +33,11 @@ Route::get('channels/create', 'ChannelsController@create');
 Route::post('channels', 'ChannelsController@store');
 
 
+//dandi
+Route::get('doctors','HomeController@search')->name('doctor.search');
 
+Route::get('chat-users', 'ChatsController@users')->name('chat.users');
+Route::get('chats', 'ChatsController@index')->name('chat.index');
+Route::get('chats/{friend}', 'ChatsController@friend')->name('chat.friend');
+Route::get('messages/{friend}', 'ChatsController@fetchMessages')->name('messages.friend');
+Route::post('messages', 'ChatsController@sendMessage');
