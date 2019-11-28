@@ -29,19 +29,17 @@
 
 
     @if(auth()->check())
-      <div class="row">
+      <div class="row justify-content-center mt-5">
         <div class="col-md-8 col-md-offset-2">
-          <div class="card">
-            <form method="POST" action="{{ $thread->path() . '/replies' }}">
+            <form class="form-horizontal" method="POST" action="{{ $thread->path() . '/replies' }}">
               {{ csrf_field() }}
                 <div class="form-group">
-                    <textarea name="description" id="description" class="form-controller" 
+                    <textarea class="form-control" name="description" id="description" class="form-controller" 
                     placeholder="have something to say?" rows="5">
                     </textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Post</button>  
-            </form> 
-          </div>           
+              <button style="min-width: 100px" type="submit" class="btn btn-primary float-right">Post</button>  
+            </form>            
         </div>
       </div>
       @else

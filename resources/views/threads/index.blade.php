@@ -15,6 +15,7 @@
                         {{ $thread->title }}
                         </a> 
                       </h4>
+                    <div class="text-muted mb-3">{{ $thread->creator->name }} &bull; {{ $thread->created_at->diffForHumans() }}</div>
                        <div class="body">{{ $thread->description }}</div>
                     </article> 
 
